@@ -1,59 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Cool Page</title>
-  <style>
-    /* Basic reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Dodging Button</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+  /* Fixed top button */
+  #fixedBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #ff4081;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
 
-    h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-    }
+  #fixedBtn:hover {
+    transform: translateY(-3px);
+  }
 
-    button {
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
-
-  </style>
+  /* Dodging button */
+  #dodger {
+    position: absolute;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 12px;
+    background-color: #00e676;
+    border: none;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.1s;
+  }
+</style>
 </head>
 <body>
 
-  <h1>Welcome to My Cool Page</h1>
-  <button onclick="sayHi()">Click Me!</button>
+<button id="fixedBtn" onclick="alert('Hi!')">Fixed Hi</button>
+<button id="dodger">Try to Click Me!</button>
 
-  <script>
-    function sayHi() {
-      alert('Hi!');
+<script>
+  const dodger = document.getElementById('dodger');
+  let posX = window.innerWidth / 2 - 75; // initial x
+  let posY = window.innerHeight / 2 - 25; // initial y
+  let velX = 2 + Math.random() * 3;
+  let velY = 2 + Math.random() * 3;
+
+  dodger.style.left = posX + 'px';
+  dodger.style.top = posY + 'px';
+
+  function update() {
+    posX += velX;
+    posY += velY;
+
+    // Bounce on edges
+    if(posX <= 0 || posX + dodger.offsetWidth >= window.innerWidth) velX *= -1;
+    if(posY <= 0 || posY + dodger.offsetHeight >= window.innerHeight) velY *= -1;
+
+    dodger.style.left = posX + 'px';
+    dodger.style.top = posY + 'px';
+
+    requestAnimationFrame(update);
+  }
+  update();
+
+  // Mouse hover for desktop
+  document.addEventListener('mousemove', e => {
+    const rect = dodger.getBoundingClientRect();
+    const distX = e.clientX - (rect.left + rect.width/2);
+    const distY = e.clientY - (rect.top + rect.height/2);
+    const distance = Math.sqrt(distX*distX + distY*distY);
+
+    if(distance < 100) {
+      velX = (distX / distance) * -5;
+      velY = (distY / distance) * -5;
     }
-  </script>
+  });
+
+  // Touch for mobile
+  document.addEventListener('touchmove', e => {
+    if(e.touches.length > 0){
+      const touch = e.touches[0];
+      const rect = dodger.getBoundingClientRect();
+      const distX = touch.clientX - (rect.left + rect.width/2);
+      const distY = touch.clientY - (rect.top + rect.height/2);
+      const distance = Math.sqrt(distX*distX + distY*distY);
+
+      if(distance < 100) {
+        velX = (distX / distance) * -5;
+        velY = (distY / distance) * -5;
+      }
+    }
+  });
+
+  // Optional: resize window handling
+  window.addEventListener('resize', () => {
+    posX = Math.min(posX, window.innerWidth - dodger.offsetWidth);
+    posY = Math.min(posY, window.innerHeight - dodger.offsetHeight);
+  });
+</script>
+
 </body>
 </html>
