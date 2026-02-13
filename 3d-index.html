@@ -75,8 +75,8 @@ joystick.addEventListener('pointermove',(e)=>{
   const maxDist = rect.width/2 - 25;
   let dist = Math.min(Math.sqrt(dx*dx+dy*dy), maxDist);
   let angle = Math.atan2(dy, dx);
-  stick.style.left = `${35 + Math.cos(angle)*dist}px`;
-  stick.style.top = `${35 + Math.sin(angle)*dist}px`;
+  stick.style.left = `$100px`;
+  stick.style.top = `$100px`;
   moveInput.x = Math.cos(angle)*(dist/maxDist);
   moveInput.y = -Math.sin(angle)*(dist/maxDist);
 });
@@ -333,6 +333,7 @@ BABYLON.SceneLoader.Append("", "chicken.glb", scene, function(scene) {
 
 </body>
 </html>
+
 
 
 
