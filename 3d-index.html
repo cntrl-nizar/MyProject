@@ -7,22 +7,22 @@
 <style>
 #joystick {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  width: 120px;
-  height: 120px;
+  bottom: 2vh;          /* 2% of viewport height from bottom */
+  left: 2vw;            /* 2% of viewport width from left */
+  width: 15vw;           /* 15% of viewport width */
+  height: 15vw;          /* keep it square */
   border-radius: 50%;
   background: rgba(200,200,200,0.3);
   touch-action: none;
 }
 #stick {
-  width: 50px;
-  height: 50px;
+  width: 6vw;           /* proportional to joystick size */
+  height: 6vw;
   background: rgba(100,100,100,0.7);
   border-radius: 50%;
   position: absolute;
-  left: 35px;
-  top: 35px;
+  left: calc(50% - 3vw); /* center the stick inside joystick */
+  top: calc(50% - 3vw);
   pointer-events: none;
 }
 </style>
@@ -327,6 +327,7 @@ BABYLON.SceneLoader.Append("", "model/chicken.glb", scene, function(scene) {
 
 </body>
 </html>
+
 
 
 
