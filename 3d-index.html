@@ -291,7 +291,7 @@ billboard.material = billboardMat;
 billboard.actionManager = new BABYLON.ActionManager(scene);
 billboard.actionManager.registerAction(
     new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
-        alert("Hi! You clicked the billboard.");
+        alert("Hi! You clicked the billboard after edit.");
     })
 );
 </script>
@@ -306,13 +306,19 @@ BABYLON.SceneLoader.Append("", "model/chicken.glb", scene, function(scene) {
     // Access the loaded meshes
     const chicken = scene.meshes[scene.meshes.length - 1]; // last mesh of loaded model
 
-    // Place it on the path (middle)
-    chicken.position = new BABYLON.Vector3(0, 0, 10);
-    
-    // Lift chicken a bit based on its bounding box
+    // Get chicken's bounding info
     const boundingInfo = chicken.getBoundingInfo();
-    const chickenHeight = boundingInfo.boundingBox.extendSize.y * 2;
-    chicken.position.y += chickenHeight / 2;
+    const currentHeight = boundingInfo.boundingBox.extendSize.y * 2; // full height
+
+    // Desired height in world units
+    const desiredHeight = 0.5; // 0.5 units = smaller than player
+
+    // Compute scale factor
+    const scaleFactor = desiredHeight / currentHeight;
+    chicken.scaling = new BABYLON.Vector3(scaleFactor, scaleFactor, scaleFactor);
+
+    // Place it on the path (middle)
+    chicken.position = new BABYLON.Vector3(0, desiredHeight / 2, 10); // lift it above floor
 
     // Optional: make it clickable
     chicken.actionManager = new BABYLON.ActionManager(scene);
@@ -321,18 +327,15 @@ BABYLON.SceneLoader.Append("", "model/chicken.glb", scene, function(scene) {
             alert("Cluck Cluck!");
         })
     );
-
-    // Dynamically scale smaller than the player
-    const playerHeight = 10; // your player's height (digit "9" plane height)
-    const scaleFactor = playerHeight / chickenHeight * 0.5; // 0.5 ensures chicken is smaller
-    chicken.scaling = new BABYLON.Vector3(scaleFactor, scaleFactor, scaleFactor);
 });
 </script>
 
 
 
+
 </body>
 </html>
+
 
 
 
