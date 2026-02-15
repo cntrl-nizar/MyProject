@@ -108,7 +108,7 @@ camera.attachControl(canvas,true);
 camera.lowerRadiusLimit = 3;
 camera.upperRadiusLimit = 15;
   
-camera.angularSensibility = 3000; // higher = slower mouse drag
+camera.angularSensibility = 10000; // higher = slower mouse drag
 camera.inertia = 0.95;            // closer to 1 = smoother deceleration
 
 
@@ -299,7 +299,7 @@ clickStar.material = clickMat;
 
 // draw text
 clickDT.drawText(
-    "<19>",
+    "do not click",
     null,
     160,
     "bold 120px Arial",
@@ -318,9 +318,47 @@ clickStar.actionManager.registerAction(
 );
 
 // function to call
-function starMessage(){
-    alert(">1 + 9< 19 919 91919 9191991");
+function starMessage() {
+
+    // Create overlay dynamically
+    const overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+    overlay.style.backgroundColor = "black";
+    overlay.style.opacity = "0";
+    overlay.style.pointerEvents = "none";
+    overlay.style.zIndex = "99999";
+
+    document.body.appendChild(overlay);
+
+    let opacity = 0;
+    const duration = 5000; // 5 seconds
+    const startTime = performance.now();
+
+    function animateDarkening(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Smooth progressive darkening
+        opacity = progress;
+        overlay.style.opacity = opacity;
+
+        if (progress < 1) {
+            requestAnimationFrame(animateDarkening);
+        } else {
+            alert("haha dont worry nothing happened");
+
+            // Remove overlay after alert
+            overlay.remove();
+        }
+    }
+
+    requestAnimationFrame(animateDarkening);
 }
+
 </script>
 
 
@@ -445,6 +483,7 @@ loadModel("lizard.glb", new BABYLON.Vector3(0, 0.5, -5));
 
 </body>
 </html>
+
 
 
 
