@@ -458,7 +458,9 @@ createBillboard(
         const password = prompt("Enter password:");
 
         if (password === "9") {
-            window.location.href = "/owo.html";
+            alert("CORRECT--welcome welcome-open the doooorrrrrrrrrrr");
+           
+          setTimeout(function(){ window.location.href = "./owo.html";},2000);
         } else if (password !== null) {
             alert("WRONG YOU IMPOSTER!!!!!!!!!!");
         }
@@ -490,23 +492,11 @@ function loadModel(modelName, position, scale = 0.005, clickable = true) {
                 mesh.parent = modelRoot;
             }
         });
-
         // Scale the model
         modelRoot.scaling = new BABYLON.Vector3(scale, scale, scale);
 
         // Set the model position
         modelRoot.position = position;
-
-        // Optional: make clickable
-        if (clickable) {
-            modelRoot.actionManager = new BABYLON.ActionManager(scene);
-            modelRoot.actionManager.registerAction(
-                new BABYLON.ExecuteCodeAction(
-                    BABYLON.ActionManager.OnPickTrigger, 
-                    () => { alert(modelName + " clicked!"); }
-                )
-            );
-        }
     });
 }
 
