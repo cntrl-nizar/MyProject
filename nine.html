@@ -256,15 +256,8 @@ for(let i = 0; i < 1000; i++){
     const digit = (i % 2 === 0) ? "1" : "9";
 
     const color = colors[Math.floor(Math.random()*colors.length)];
-    dt.drawText(
-        digit,
-        null,
-        800,
-        "bold 800px Arial",
-        color,
-        null,
-        true
-    );
+   dt.drawText( digit, null, 180, "bold 180px Arial", color, null, true );
+  
 }
 
 
@@ -291,7 +284,7 @@ clickStar.material = clickMat;
 
 // draw text
 clickDT.drawText(
-    "other side",
+    "<19>",
     null,
     160,
     "bold 120px Arial",
@@ -311,7 +304,7 @@ clickStar.actionManager.registerAction(
 
 // function to call
 function starMessage(){
-    alert("hi");
+    alert(">1 + 9< 19 919 91919 9191991");
 }
 </script>
 
@@ -414,6 +407,7 @@ loadModel("lizard.glb", new BABYLON.Vector3(0, 0.5, -5));
 
 </body>
 </html>
+
 
 
 
