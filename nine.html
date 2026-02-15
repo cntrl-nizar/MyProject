@@ -409,10 +409,32 @@ createBillboard(
     3,
     () => { 
         console.log("Billboard clicked! You can run any code here."); 
-        alert("Hi! 1."); 
+        alert("Hi! (3, 1, 50)"); 
     }
 );
 
+  createBillboard(
+    "https://akm-img-a-in.tosshub.com/sites/dailyo//resources/202311/copy-of-g2-cover-2091123125338.png?size=*:480",
+    new BABYLON.Vector3(-3, 1, 40),
+    3,
+    3,
+    () => { 
+        console.log("Billboard clicked! You can run any code here."); 
+        alert("Hi! (-3, 1, 40)"); 
+    }
+);
+
+  createBillboard(
+    "https://akm-img-a-in.tosshub.com/sites/dailyo//resources/202311/copy-of-g2-cover-2091123125338.png?size=*:480",
+    new BABYLON.Vector3(3, 1, 30),
+    3,
+    3,
+    () => { 
+        console.log("Billboard clicked! You can run any code here."); 
+        alert("Hi! (3, 1, 30)"); 
+    }
+);
+  
   createBillboard(
     "https://akm-img-a-in.tosshub.com/sites/dailyo//resources/202311/copy-of-g2-cover-2091123125338.png?size=*:480",
     new BABYLON.Vector3(-3, 1, 0),
@@ -420,7 +442,7 @@ createBillboard(
     3,
     () => { 
         console.log("Billboard clicked! You can run any code here."); 
-        alert("Hi! 2."); 
+        alert("Hi! (-3, 1, 0)"); 
     }
 );
 
@@ -431,7 +453,7 @@ createBillboard(
     2,
     () => { 
         console.log("Billboard clicked! You can run any code here."); 
-        alert("locked"); 
+        alert("locked (0, 1, 100)"); 
     }
 );
 </script>
@@ -487,6 +509,7 @@ loadModel("lizard.glb", new BABYLON.Vector3(0, 0.5, -5));
 
 </body>
 </html>
+
 
 
 
