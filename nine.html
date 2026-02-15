@@ -184,7 +184,8 @@ scene.collisionsEnabled = true;
 // -------- FLOOR (plain) --------
 const floor = BABYLON.MeshBuilder.CreateGround("floor",{width:20,height:200},scene);
 const floorMat = new BABYLON.StandardMaterial("floorMat",scene);
-floorMat.diffuseColor = new BABYLON.Color3(0.15,0.15,0.15); // neutral dark
+floorMat.diffuseColor = new BABYLON.Color3(0.1, 0.3, 0.1); // dark green
+
 floor.material = floorMat;
 floor.checkCollisions = true;
 
@@ -192,7 +193,8 @@ floor.checkCollisions = true;
 const path = BABYLON.MeshBuilder.CreateGround("path",{width:4,height:200},scene);
 path.position.y = 0.02;
 const pathMat = new BABYLON.StandardMaterial("pathMat",scene);
-pathMat.diffuseColor = new BABYLON.Color3(1,1,1);
+pathMat.diffuseColor = new BABYLON.Color3(0.4, 0.25, 0.1);
+
 path.material = pathMat;
 path.checkCollisions = true;
 </script>
@@ -398,6 +400,7 @@ loadModel("book.glb", new BABYLON.Vector3(10, 1, 0));
 
 </body>
 </html>
+
 
 
 
