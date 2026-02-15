@@ -320,7 +320,6 @@ clickStar.actionManager.registerAction(
 // function to call
 function starMessage() {
 
-    // Create overlay dynamically
     const overlay = document.createElement("div");
     overlay.style.position = "fixed";
     overlay.style.top = "0";
@@ -334,34 +333,35 @@ function starMessage() {
 
     document.body.appendChild(overlay);
 
-    let opacity = 0;
-    const duration = 12000; // 1000 = second
+    const duration = 12000; // total fade time (12 sec)
+    const midPoint = 5000;  // 5 seconds mark
+
     const startTime = performance.now();
+    let midMessageShown = false;
 
     function animateDarkening(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
-        // Smooth progressive darkening
-        opacity = progress;
-        overlay.style.opacity = opacity;
+        overlay.style.opacity = progress;
+
+        // Show message at 5 seconds (only once)
+        if (elapsed >= midPoint && !midMessageShown) {
+            midMessageShown = true;
+            alert("what have you done... and whyy whyy just whyy..");
+        }
 
         if (progress < 1) {
             requestAnimationFrame(animateDarkening);
-        }
-        else if (progress == 5) {
-            requestAnimationFrame(animateDarkening);
-            alert("whatt have youu doneee? Please god have mercy!");
-        }
-        else {
+        } else {
             alert("haha dont worry nothing happened");
-            // Remove overlay after alert
             overlay.remove();
         }
     }
 
     requestAnimationFrame(animateDarkening);
 }
+
 
 </script>
 
@@ -487,6 +487,7 @@ loadModel("lizard.glb", new BABYLON.Vector3(0, 0.5, -5));
 
 </body>
 </html>
+
 
 
 
